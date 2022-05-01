@@ -24,12 +24,24 @@ public class User {
     @Email(message = "Invalid email. Try Again.")
     private String email;
 
-    public User(String username, String email) {
+    @NotBlank(message = "Full name is required")
+    private String fullName;
+
+    public User(String username, String email, String fullName) {
         this.username = username;
         this.email = email;
+        this.fullName = fullName;
     }
 
     public User() {}
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
     public int getId() {
         return id;
@@ -56,11 +68,12 @@ public class User {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return getId() == user.getId() && username.equals(user.username) && getEmail().equals(user.getEmail());
+        return getId() == user.getId() && username.equals(user.username) && getEmail().equals(user.getEmail()) && getFullName().equals(user.getFullName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), username, getEmail());
+        return Objects.hash(getId(), username, getEmail(), getFullName());
     }
+
 }

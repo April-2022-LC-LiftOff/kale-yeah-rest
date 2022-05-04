@@ -1,20 +1,15 @@
 package kaleyearest.project.models;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-
 @Entity
-public class User {
+public class User extends AbstractEntity {
 
-    @Id
-    @GeneratedValue
-    private int id;
+
 
     @NotBlank(message = "Username is Required")
     @Size(min = 3 , max = 50)
@@ -30,10 +25,6 @@ public class User {
     }
 
     public User() {}
-
-    public int getId() {
-        return id;
-    }
 
     public String getName() {
         return username;

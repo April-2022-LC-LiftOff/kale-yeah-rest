@@ -6,10 +6,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
+
 @Entity
 public class User extends AbstractEntity {
-
-
 
     @NotBlank(message = "Username is Required")
     @Size(min = 3 , max = 50)
@@ -19,12 +18,25 @@ public class User extends AbstractEntity {
     @Email(message = "Invalid email. Try Again.")
     private String email;
 
-    public User(String username, String email) {
+    @NotBlank(message = "Full name is required")
+    private String fullName;
+
+    public User(String username, String email, String fullName) {
         this.username = username;
         this.email = email;
+        this.fullName = fullName;
     }
 
+
     public User() {}
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
     public String getName() {
         return username;

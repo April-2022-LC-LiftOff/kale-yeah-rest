@@ -1,8 +1,10 @@
 package kaleyearest.project.models;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
@@ -35,7 +37,11 @@ public class Recipes extends AbstractEntity {
 
     public Recipes() {};
 
-    public Recipes(String recipeName, int recipeYield, String category, String recipeIngredients, String recipeInstructions, String cookingMethod, int calories) {
+    @ManyToOne
+    @NotNull(message = "User is required")
+    private User user;
+
+    public Recipes(String recipeName, int recipeYield, String category, String recipeIngredients, String recipeInstructions, String cookingMethod, int calories, User user) {
         this.recipeName = recipeName;
         this.recipeYield = recipeYield;
         this.category = category;
@@ -43,6 +49,15 @@ public class Recipes extends AbstractEntity {
         this.recipeInstructions = recipeInstructions;
         this.cookingMethod = cookingMethod;
         this.calories = calories;
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getRecipeName() {

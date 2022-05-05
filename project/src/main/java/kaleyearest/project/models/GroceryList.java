@@ -1,8 +1,10 @@
 package kaleyearest.project.models;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -14,9 +16,22 @@ public class GroceryList extends AbstractEntity {
     @Min(0)
     private double price;
 
-    public GroceryList(String ingredient, double price) {
+    @OneToOne
+    @NotNull(message = "User is required")
+    private User user;
+
+    public GroceryList(String ingredient, double price, User user) {
         this.ingredient = ingredient;
         this.price = price;
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public GroceryList(){}

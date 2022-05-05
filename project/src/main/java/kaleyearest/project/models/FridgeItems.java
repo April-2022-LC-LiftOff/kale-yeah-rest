@@ -2,6 +2,7 @@ package kaleyearest.project.models;
 
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -22,14 +23,27 @@ public class FridgeItems extends AbstractEntity {
     @NotNull
     private String expirationDate;
 
-    public FridgeItems(String ingredients, String category, int quantity, String expirationDate) {
+    @OneToOne
+    @NotNull(message = "User is required")
+    private User user;
+
+    public FridgeItems(String ingredients, String category, int quantity, String expirationDate, User user) {
         this.ingredients = ingredients;
         this.category = category;
         this.quantity = quantity;
         this.expirationDate = expirationDate;
+        this.user = user;
     }
 
     public FridgeItems() {}
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public String getIngredients() {
         return ingredients;

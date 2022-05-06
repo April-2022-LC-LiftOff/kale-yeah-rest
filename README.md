@@ -1,3 +1,3 @@
 # kale-yeah-rest
 ##api service for kale-yeah app
-**eddy-api-aggregator-api
+**eddy-api-aggregator-api**

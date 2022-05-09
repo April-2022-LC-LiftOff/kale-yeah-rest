@@ -1,8 +1,6 @@
 package kaleyearest.project.models;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -10,11 +8,7 @@ import java.util.Objects;
 
 
 @Entity
-public class User {
-
-    @Id
-    @GeneratedValue
-    private int id;
+public class User extends AbstractEntity {
 
     @NotBlank(message = "Username is Required")
     @Size(min = 3 , max = 50)
@@ -33,6 +27,7 @@ public class User {
         this.fullName = fullName;
     }
 
+
     public User() {}
 
     public String getFullName() {
@@ -41,10 +36,6 @@ public class User {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getName() {
@@ -68,12 +59,11 @@ public class User {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return getId() == user.getId() && username.equals(user.username) && getEmail().equals(user.getEmail()) && getFullName().equals(user.getFullName());
+        return getId() == user.getId() && username.equals(user.username) && getEmail().equals(user.getEmail());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), username, getEmail(), getFullName());
+        return Objects.hash(getId(), username, getEmail());
     }
-
 }

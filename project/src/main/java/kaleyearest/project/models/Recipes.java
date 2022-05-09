@@ -1,21 +1,19 @@
 package kaleyearest.project.models;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.HashMap;
 import java.util.Objects;
 
 @Entity
-public class Recipes {
+public class Recipes extends AbstractEntity {
 
-    @Id
-    @GeneratedValue
-    private int id;
 
+    @NotBlank(message = "Recipe name is required")
+    private String recipeName;
 
     @Min(0)
     private int recipeYield;
@@ -24,8 +22,8 @@ public class Recipes {
     @Size(min = 3, max = 20)
     private String category;
 
-
-    private HashMap<Integer,String> recipeIngredients = new HashMap<>();
+    @NotBlank
+    private String recipeIngredients;
 
     @NotBlank
     private String recipeInstructions;
@@ -39,19 +37,36 @@ public class Recipes {
 
     public Recipes() {};
 
-    public Recipes(int recipeYield, String category, HashMap<Integer, String> recipeIngredients, String recipeInstructions, String cookingMethod, int calories) {
+    @ManyToOne
+    @NotNull(message = "User is required")
+    private User user;
+
+    public Recipes(String recipeName, int recipeYield, String category, String recipeIngredients, String recipeInstructions, String cookingMethod, int calories, User user) {
+        this.recipeName = recipeName;
         this.recipeYield = recipeYield;
         this.category = category;
         this.recipeIngredients = recipeIngredients;
         this.recipeInstructions = recipeInstructions;
         this.cookingMethod = cookingMethod;
         this.calories = calories;
+        this.user = user;
     }
 
-    public int getId() {
-        return id;
+    public User getUser() {
+        return user;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getRecipeName() {
+        return recipeName;
+    }
+
+    public void setRecipeName(String recipeName) {
+        this.recipeName = recipeName;
+    }
 
     public int getRecipeYield() {
         return recipeYield;
@@ -69,11 +84,11 @@ public class Recipes {
         this.category = category;
     }
 
-    public HashMap<Integer, String> getRecipeIngredients() {
+    public String getRecipeIngredients() {
         return recipeIngredients;
     }
 
-    public void setRecipeIngredients(HashMap<Integer, String> recipeIngredients) {
+    public void setRecipeIngredients(String recipeIngredients) {
         this.recipeIngredients = recipeIngredients;
     }
 

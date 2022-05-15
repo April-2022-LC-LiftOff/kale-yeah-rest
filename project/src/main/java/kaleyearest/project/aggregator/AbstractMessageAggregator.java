@@ -1,2 +1,0 @@
-package kaleyearest.project.aggregator;
-

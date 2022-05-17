@@ -1,16 +1,17 @@
 package kaleyearest.project;
 
+import kaleyearest.project.Data.UserRepository;
+import kaleyearest.project.models.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-//import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-//import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
-//import org.springframework.web.reactive.function.client.WebClient;
 
 @SpringBootApplication
-//@EnableEurekaClient
-public class ProjectApplication {
+public class ProjectApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjectApplication.class, args);
@@ -22,4 +23,13 @@ public class ProjectApplication {
 	}
 
 
+	@Autowired
+	private UserRepository userRepository;
+
+	@Override
+	public void run(String... args) throws Exception {
+		this.userRepository.save(new User("educia27","edd990@aol.com","Eduardo Cornelius"));
+		this.userRepository.save(new User("amg7v7","arnold@arnold.com","Andrew Ragnarson"));
+		this.userRepository.save(new User("frankthetank","frank@frankenstein.com","Frank Sinatra"));
+	}
 }

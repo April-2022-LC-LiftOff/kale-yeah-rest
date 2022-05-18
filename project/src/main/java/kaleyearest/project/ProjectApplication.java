@@ -28,8 +28,8 @@ public class ProjectApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		this.userRepository.save(new User("educia27","edd990@aol.com","Eduardo Cornelius"));
-		this.userRepository.save(new User("amg7v7","arnold@arnold.com","Andrew Ragnarson"));
-		this.userRepository.save(new User("frankthetank","frank@frankenstein.com","Frank Sinatra"));
+//		this.userRepository.save(new User("educia27","edd990@aol.com","Eduardo Cornelius"));
+//		this.userRepository.save(new User("amg7v7","arnold@arnold.com","Andrew Ragnarson"));
+//		this.userRepository.save(new User("frankthetank","frank@frankenstein.com","Frank Sinatra"));
 	}
 }

@@ -14,11 +14,11 @@ public class SpringCloudConfig
     {
         return routeLocatorBuilder.routes()
                 .route("Ingredient Service", rt -> rt.path("/ingredients/**")
-                        .uri("http://localhost:8081/"))
+                        .uri("http://localhost:8080/"))
                 .route("Recipe Service",rt -> rt.path("/recipes/**")
-                        .uri("http://localhost:8082/"))
+                        .uri("http://localhost:8080/"))
                 .route("Meal Planning Service",rt -> rt.path("/planning/**")
-                        .uri("http://localhost:8083/"))
+                        .uri("http://localhost:8080/"))
                 .build();
 
 

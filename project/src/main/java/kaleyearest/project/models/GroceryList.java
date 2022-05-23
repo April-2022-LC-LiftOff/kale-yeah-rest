@@ -1,30 +1,39 @@
 package kaleyearest.project.models;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 
 @Entity
 public class GroceryList extends AbstractEntity {
 
-    @NotBlank(message= "Ingredient is required")
-    private String ingredient;
-
-    @Min(0)
-    private double price;
+    @OneToMany
+    @NotBlank(message= "Items are required")
+    private List<Ingredient> items = new ArrayList<>();
 
     @OneToOne
     @NotNull(message = "User is required")
     private User user;
 
-    public GroceryList(String ingredient, double price, User user) {
-        this.ingredient = ingredient;
-        this.price = price;
+    @NotNull(message = "Date required")
+    private Date date;
+
+    private boolean isCompleted = false;
+
+    public GroceryList(List<Ingredient> items, User user, Date date) {
+        this.items = items;
         this.user = user;
+        this.date = date;
+
     }
+
+    public GroceryList(){}
 
     public User getUser() {
         return user;
@@ -34,22 +43,27 @@ public class GroceryList extends AbstractEntity {
         this.user = user;
     }
 
-    public GroceryList(){}
-
-    public String getIngredient() {
-        return ingredient;
+    public List<Ingredient> getItems() {
+        return items;
     }
 
-    public void setIngredient(String ingredient) {
-        this.ingredient = ingredient;
+    public void setItems(List<Ingredient> items) {
+        this.items = items;
     }
 
-    public double getPrice() {
-        return price;
+    public Date getDate() {
+        return date;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted() {
+        this.isCompleted = true;
+    }
 }

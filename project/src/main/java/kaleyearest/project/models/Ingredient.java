@@ -1,14 +1,12 @@
 package kaleyearest.project.models;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
 @Entity
-public class Ingredients extends AbstractEntity {
+public class Ingredient extends AbstractEntity {
 
     @NotBlank(message= "Ingredient name is required")
     @Size(min = 3, max = 50)
@@ -18,25 +16,18 @@ public class Ingredients extends AbstractEntity {
     @Size(min = 3 , max = 50)
     private String category;
 
-    @ManyToOne
-    @NotNull(message = "User is required")
-    private User user;
+    private double price;
 
-    public Ingredients() {};
+    private int calories;
 
-    public Ingredients(String name, String category, User user) {
+    public Ingredient(String name, String category, double price, int calories) {
         this.name = name;
         this.category = category;
-        this.user = user;
+        this.price = price;
+        this.calories = calories;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+    public Ingredient() {};
 
     public String getName() {
         return name;
@@ -54,4 +45,19 @@ public class Ingredients extends AbstractEntity {
         this.category = category;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getCalories() {
+        return calories;
+    }
+
+    public void setCalories(int calories) {
+        this.calories = calories;
+    }
 }

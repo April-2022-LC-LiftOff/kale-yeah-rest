@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -21,12 +23,22 @@ public class User extends AbstractEntity {
     @NotBlank(message = "Full name is required")
     private String fullName;
 
+    @NotBlank(message = "Password required")
+    private String password;
+
+    private Pantry fridge;
+
+    private Pantry pantry;
+
+    private List<GroceryList> lists = new ArrayList();
+
+    private List<Recipes> favoriteRecipes = new ArrayList();
+
     public User(String username, String email, String fullName) {
         this.username = username;
         this.email = email;
         this.fullName = fullName;
     }
-
 
     public User() {}
 

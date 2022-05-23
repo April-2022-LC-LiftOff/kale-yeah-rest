@@ -1,6 +1,5 @@
 package kaleyearest.project.config;
 
-//import kaleyearest.project.util.AppConstants;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;

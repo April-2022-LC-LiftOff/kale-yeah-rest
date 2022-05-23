@@ -3,11 +3,22 @@ package kaleyearest.project.resources;
 import kaleyearest.project.models.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+@RestController
+@RequestMapping("/recipes")
+public class RecipesResource {
+
+
+@CrossOrigin(origins= "http://localhost:3000")
 @RestController
 @RequestMapping("/recipes")
 public class RecipesResource {
@@ -28,5 +39,6 @@ public class RecipesResource {
 //        HttpEntity<String> entity = new HttpEntity<String>(headers);
 //        //method combines searching by query, by ingredients, and by nutrients into one endpoint.
 //        return restTemplate.exchange("https://api.spoonacular.com/recipes/complexSearch?query=" + queryValue + "&apiKey=" + apiKey, HttpMethod.GET, entity, String.class).getBody();
+
     }
 }

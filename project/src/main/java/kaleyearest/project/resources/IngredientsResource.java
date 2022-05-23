@@ -2,6 +2,7 @@ package kaleyearest.project.resources;
 
 
 
+import kaleyearest.project.models.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -30,12 +31,11 @@ public class IngredientsResource {
     private String apiKey;
 
     @RequestMapping("/{name}")
-    public String getIngredientsList(@PathVariable("name") String name) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-        HttpEntity <String> entity = new HttpEntity<String>(headers);
-        //Search for simple whole foods (e.g. fruits, vegetables, nuts, grains, meat, fish, dairy etc.).
-        return restTemplate.exchange("https://api.spoonacular.com/food/ingredients/search?query=" + name + "&apiKey=" + apiKey, HttpMethod.GET, entity, String.class).getBody();
+    public Results getIngredientsList(@PathVariable("name") String name) {
+
+        Results results = restTemplate.getForObject("https://api.spoonacular.com/food/ingredients/search?query=" + name + "&apiKey=" + apiKey, Results.class);
+        return results;
+
     }
 
 

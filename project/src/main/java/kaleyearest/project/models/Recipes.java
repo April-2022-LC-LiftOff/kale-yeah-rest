@@ -1,11 +1,14 @@
 package kaleyearest.project.models;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -13,20 +16,21 @@ public class Recipes extends AbstractEntity {
 
 
     @NotBlank(message = "Recipe name is required")
-    private String recipeName;
+    private String name;
+
+    @OneToMany
+    @NotBlank
+    private List<Ingredient> ingredients = new ArrayList<>();
 
     @Min(0)
-    private int recipeYield;
+    private int yield;
 
     @NotBlank
     @Size(min = 3, max = 20)
     private String category;
 
     @NotBlank
-    private String recipeIngredients;
-
-    @NotBlank
-    private String recipeInstructions;
+    private String instructions;
 
     @NotBlank
     @Size(min = 3, max = 20)
@@ -35,22 +39,22 @@ public class Recipes extends AbstractEntity {
     @Min(0)
     private int calories;
 
-    public Recipes() {};
-
-    @ManyToOne
+    @ManyToMany
     @NotNull(message = "User is required")
     private User user;
 
-    public Recipes(String recipeName, int recipeYield, String category, String recipeIngredients, String recipeInstructions, String cookingMethod, int calories, User user) {
-        this.recipeName = recipeName;
-        this.recipeYield = recipeYield;
+    public Recipes(String name, List<Ingredient> ingredients, int yield, String category, String instructions, String cookingMethod, int calories, User user) {
+        this.name = name;
+        this.yield = yield;
         this.category = category;
-        this.recipeIngredients = recipeIngredients;
-        this.recipeInstructions = recipeInstructions;
+        this.ingredients = ingredients;
+        this.instructions = instructions;
         this.cookingMethod = cookingMethod;
         this.calories = calories;
         this.user = user;
     }
+
+    public Recipes() {};
 
     public User getUser() {
         return user;
@@ -61,19 +65,19 @@ public class Recipes extends AbstractEntity {
     }
 
     public String getRecipeName() {
-        return recipeName;
+        return name;
     }
 
-    public void setRecipeName(String recipeName) {
-        this.recipeName = recipeName;
+    public void setRecipeName(String name) {
+        this.name = name;
     }
 
-    public int getRecipeYield() {
-        return recipeYield;
+    public int getYield() {
+        return yield;
     }
 
-    public void setRecipeYield(int recipeYield) {
-        this.recipeYield = recipeYield;
+    public void setYield(int yield) {
+        this.yield = yield;
     }
 
     public String getCategory() {
@@ -84,20 +88,20 @@ public class Recipes extends AbstractEntity {
         this.category = category;
     }
 
-    public String getRecipeIngredients() {
-        return recipeIngredients;
+    public List<Ingredient> getRecipeIngredients() {
+        return ingredients;
     }
 
-    public void setRecipeIngredients(String recipeIngredients) {
-        this.recipeIngredients = recipeIngredients;
+    public void setRecipeIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 
-    public String getRecipeInstructions() {
-        return recipeInstructions;
+    public String getInstructions() {
+        return instructions;
     }
 
-    public void setRecipeInstructions(String recipeInstructions) {
-        this.recipeInstructions = recipeInstructions;
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
     }
 
     public String getCookingMethod() {
@@ -121,11 +125,11 @@ public class Recipes extends AbstractEntity {
         if (this == o) return true;
         if (!(o instanceof Recipes)) return false;
         Recipes recipes = (Recipes) o;
-        return getId() == recipes.getId() && getRecipeYield() == recipes.getRecipeYield() && getCalories() == recipes.getCalories() && getCategory().equals(recipes.getCategory()) && getRecipeIngredients().equals(recipes.getRecipeIngredients()) && getRecipeInstructions().equals(recipes.getRecipeInstructions()) && getCookingMethod().equals(recipes.getCookingMethod());
+        return getId() == recipes.getId() && getYield() == recipes.getYield() && getCalories() == recipes.getCalories() && getCategory().equals(recipes.getCategory()) && getRecipeIngredients().equals(recipes.getRecipeIngredients()) && getInstructions().equals(recipes.getInstructions()) && getCookingMethod().equals(recipes.getCookingMethod());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getRecipeYield(), getCategory(), getRecipeIngredients(), getRecipeInstructions(), getCookingMethod(), getCalories());
+        return Objects.hash(getId(), getYield(), getCategory(), getRecipeIngredients(), getInstructions(), getCookingMethod(), getCalories());
     }
 }

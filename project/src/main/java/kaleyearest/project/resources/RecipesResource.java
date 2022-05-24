@@ -13,10 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-@RestController
-@RequestMapping("/recipes")
-public class RecipesResource {
-
 
 @CrossOrigin(origins= "http://localhost:3000")
 @RestController

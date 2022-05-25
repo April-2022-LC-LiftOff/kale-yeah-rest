@@ -1,6 +1,8 @@
 package kaleyearest.project.models;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -19,6 +21,22 @@ public class Ingredient extends AbstractEntity {
     private double price;
 
     private int calories;
+
+    @ManyToOne
+    @JoinColumn(name = "grocery_list_id")
+    private GroceryList groceryList;
+
+    @ManyToOne
+    @JoinColumn(name = "recipes_id")
+    private Recipes recipes;
+
+    public Recipes getRecipes() {
+        return recipes;
+    }
+
+    public GroceryList getGroceryList() {
+        return groceryList;
+    }
 
     public Ingredient(String name, String category, double price, int calories) {
         this.name = name;

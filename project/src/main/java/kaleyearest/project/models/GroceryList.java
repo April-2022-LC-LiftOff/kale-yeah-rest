@@ -13,7 +13,7 @@ import java.util.List;
 @Entity
 public class GroceryList extends AbstractEntity {
 
-    @OneToMany
+    @OneToMany(mappedBy = "groceryList")
     @NotBlank(message= "Items are required")
     private List<Ingredient> items = new ArrayList<>();
 

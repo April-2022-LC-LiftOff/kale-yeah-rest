@@ -1,6 +1,6 @@
 package kaleyearest.project.models;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -26,13 +26,22 @@ public class User extends AbstractEntity {
     @NotBlank(message = "Password required")
     private String password;
 
-    private Pantry fridge;
+//    @Transient
+//    private Pantry pantry;
 
-    private Pantry pantry;
+    @ElementCollection
+    private List<GroceryList> groceryLists = new ArrayList();
 
-    private List<GroceryList> lists = new ArrayList();
-
+    @ElementCollection
     private List<Recipes> favoriteRecipes = new ArrayList();
+
+//    public Pantry getPantry() {
+//        return pantry;
+//    }
+//
+//    public Pantry getFridge() {
+//        return pantry;
+//    }
 
     public User(String username, String email, String fullName) {
         this.username = username;

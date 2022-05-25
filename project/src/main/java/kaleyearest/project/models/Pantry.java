@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 public class Pantry extends AbstractEntity{
 
-    @OneToMany
+    @OneToMany(mappedBy = "pantry")
     private List<PantryFridgeItem> items = new ArrayList<>();
 
     @OneToOne

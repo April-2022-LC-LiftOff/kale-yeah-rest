@@ -2,6 +2,7 @@ package kaleyearest.project.models;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -18,7 +19,7 @@ public class Recipes extends AbstractEntity {
     @NotBlank(message = "Recipe name is required")
     private String name;
 
-    @OneToMany
+    @OneToMany(mappedBy = "recipes")
     @NotBlank
     private List<Ingredient> ingredients = new ArrayList<>();
 
@@ -39,7 +40,7 @@ public class Recipes extends AbstractEntity {
     @Min(0)
     private int calories;
 
-    @ManyToMany
+    @ManyToOne
     @NotNull(message = "User is required")
     private User user;
 

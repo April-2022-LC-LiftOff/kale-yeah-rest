@@ -10,6 +10,7 @@ import java.util.Objects;
 
 
 @Entity
+@Table(name = "user")
 public class User extends AbstractEntity {
 
     @NotBlank(message = "Username is Required")
@@ -43,10 +44,11 @@ public class User extends AbstractEntity {
 //        return pantry;
 //    }
 
-    public User(String username, String email, String fullName) {
+    public User(String username, String email, String fullName, String password) {
         this.username = username;
         this.email = email;
         this.fullName = fullName;
+        this.password = password;
     }
 
     public User() {}
@@ -59,11 +61,11 @@ public class User extends AbstractEntity {
         this.fullName = fullName;
     }
 
-    public String getName() {
+    public String getUsername() {
         return username;
     }
 
-    public void setName(String name) {
+    public void setUsername(String name) {
         this.username = username;
     }
 

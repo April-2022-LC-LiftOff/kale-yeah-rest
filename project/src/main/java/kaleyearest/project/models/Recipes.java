@@ -18,6 +18,7 @@ public class Recipes extends AbstractEntity {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "recipes", cascade = CascadeType.ALL)
     @NotNull
+    @ElementCollection
     private List<Ingredient> ingredients = new ArrayList<>();
 
     @Min(0)
@@ -37,7 +38,7 @@ public class Recipes extends AbstractEntity {
     @Min(0)
     private int calories;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne
     @NotNull(message = "User is required")
     private User user;
 

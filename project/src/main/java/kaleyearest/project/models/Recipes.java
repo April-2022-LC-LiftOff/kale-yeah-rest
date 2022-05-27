@@ -1,8 +1,6 @@
 package kaleyearest.project.models;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -18,8 +16,9 @@ public class Recipes extends AbstractEntity {
     @NotBlank(message = "Recipe name is required")
     private String name;
 
-    @OneToMany
-    @NotBlank
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "recipes", cascade = CascadeType.ALL)
+    @NotNull
+    @ElementCollection
     private List<Ingredient> ingredients = new ArrayList<>();
 
     @Min(0)
@@ -39,7 +38,7 @@ public class Recipes extends AbstractEntity {
     @Min(0)
     private int calories;
 
-    @ManyToMany
+    @ManyToOne
     @NotNull(message = "User is required")
     private User user;
 
@@ -88,11 +87,11 @@ public class Recipes extends AbstractEntity {
         this.category = category;
     }
 
-    public List<Ingredient> getRecipeIngredients() {
+    public List<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public void setRecipeIngredients(List<Ingredient> ingredients) {
+    public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 
@@ -125,11 +124,11 @@ public class Recipes extends AbstractEntity {
         if (this == o) return true;
         if (!(o instanceof Recipes)) return false;
         Recipes recipes = (Recipes) o;
-        return getId() == recipes.getId() && getYield() == recipes.getYield() && getCalories() == recipes.getCalories() && getCategory().equals(recipes.getCategory()) && getRecipeIngredients().equals(recipes.getRecipeIngredients()) && getInstructions().equals(recipes.getInstructions()) && getCookingMethod().equals(recipes.getCookingMethod());
+        return getId() == recipes.getId() && getYield() == recipes.getYield() && getCalories() == recipes.getCalories() && getCategory().equals(recipes.getCategory()) && getIngredients().equals(recipes.getIngredients()) && getInstructions().equals(recipes.getInstructions()) && getCookingMethod().equals(recipes.getCookingMethod());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getYield(), getCategory(), getRecipeIngredients(), getInstructions(), getCookingMethod(), getCalories());
+        return Objects.hash(getId(), getYield(), getCategory(), getIngredients(), getInstructions(), getCookingMethod(), getCalories());
     }
 }

@@ -2,6 +2,8 @@ package kaleyearest.project.models;
 
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -20,6 +22,15 @@ public class PantryFridgeItem extends AbstractEntity {
 
     @NotNull
     private String expirationDate;
+
+
+    @ManyToOne
+    @JoinColumn(name = "pantry_id")
+    private Pantry pantry;
+
+    public Pantry getPantry() {
+        return pantry;
+    }
 
     public PantryFridgeItem(Ingredient ingredient, int quantity, String expirationDate) {
         this.ingredient = ingredient;

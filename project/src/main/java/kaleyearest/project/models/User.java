@@ -1,8 +1,11 @@
 package kaleyearest.project.models;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,19 +16,16 @@ import java.util.Objects;
 @Table(name = "user")
 public class User extends AbstractEntity {
 
-    @NotBlank(message = "Username is Required")
-    @Size(min = 3 , max = 50)
+    @NotNull
     private String username;
 
-    @NotBlank(message = "Email is Required")
-    @Email(message = "Invalid email. Try Again.")
+    @NotNull
     private String email;
 
-    @NotBlank(message = "Full name is required")
-    private String fullName;
+    @NotNull
+    private String pwHash;
 
-    @NotBlank(message = "Password required")
-    private String password;
+    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 //    @Transient
 //    private Pantry pantry;
@@ -44,37 +44,16 @@ public class User extends AbstractEntity {
 //        return pantry;
 //    }
 
-    public User(String username, String email, String fullName, String password) {
-        this.username = username;
+    public User(String email, String username, String password) {
         this.email = email;
-        this.fullName = fullName;
-        this.password = password;
+        this.username = username;
+        this.pwHash = encoder.encode(password);
     }
 
     public User() {}
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String name) {
-        this.username = username;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     @Override
@@ -88,5 +67,9 @@ public class User extends AbstractEntity {
     @Override
     public int hashCode() {
         return Objects.hash(getId(), username, getEmail());
+    }
+
+    public boolean isMatchingPassword(String password) {
+        return encoder.matches(password, pwHash);
     }
 }

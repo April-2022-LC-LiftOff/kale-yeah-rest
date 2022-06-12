@@ -1,10 +1,10 @@
 package kaleyearest.project;
 
 import kaleyearest.project.Data.IngredientsRepository;
-import kaleyearest.project.Data.RecipesRepository;
+//import kaleyearest.project.Data.RecipesRepository;
 import kaleyearest.project.Data.UserRepository;
 import kaleyearest.project.models.Ingredient;
-import kaleyearest.project.models.Recipes;
+//import kaleyearest.project.models.Recipes;
 import kaleyearest.project.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -36,8 +36,8 @@ public class ProjectApplication implements CommandLineRunner {
 	@Autowired
 	private IngredientsRepository ingredientsRepository;
 
-	@Autowired
-	private RecipesRepository recipesRepository;
+//	@Autowired
+//	private RecipesRepository recipesRepository;
 
 	@Override
 	public void run(String... args) throws Exception {

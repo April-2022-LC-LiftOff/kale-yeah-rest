@@ -1,51 +1,55 @@
 package kaleyearest.project.models;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 
 @Entity
 public class Ingredient extends AbstractEntity {
-
+    @JsonProperty("groceryId")
+    public String groceryId;
     @NotBlank(message= "Ingredient name is required")
     @Size(min = 3, max = 50)
-    private String name;
+    @JsonProperty("name")
+    public String name;
 
-    @NotBlank
-    @Size(min = 3 , max = 50)
-    private String category;
-
-    private double price;
-
-    private int calories;
 
     @ManyToOne
     @JoinColumn(name = "grocery_list_id")
     private GroceryList groceryList;
 
-    @ManyToOne
-    @JoinColumn(name = "recipes_id")
-    private Recipes recipes;
-
-    public Recipes getRecipes() {
-        return recipes;
-    }
+//    @ManyToOne
+//    @JoinColumn(name = "recipes_id")
+//    private Recipes recipes;
+//
+//    public Recipes getRecipes() {
+//        return recipes;
+//    }
 
     public GroceryList getGroceryList() {
         return groceryList;
     }
 
-    public Ingredient(String name, String category, double price, int calories) {
+    public Ingredient(String name, String groceryId) {
         this.name = name;
-        this.category = category;
-        this.price = price;
-        this.calories = calories;
+        this.groceryId = groceryId;
+
     }
 
     public Ingredient() {};
+
+    public String getGroceryId() {
+        return groceryId;
+    }
+
+    public void setGroceryId(String groceryId) {
+        this.groceryId = groceryId;
+    }
 
     public String getName() {
         return name;
@@ -55,27 +59,5 @@ public class Ingredient extends AbstractEntity {
         this.name = name;
     }
 
-    public String getCategory() {
-        return category;
-    }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public int getCalories() {
-        return calories;
-    }
-
-    public void setCalories(int calories) {
-        this.calories = calories;
-    }
 }

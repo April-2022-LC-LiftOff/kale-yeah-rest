@@ -1,47 +1,31 @@
 package kaleyearest.project.models;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
 @Entity
 public class GroceryList extends AbstractEntity {
-
-    @OneToMany(mappedBy = "groceryList")
-    @NotBlank(message= "Items are required")
+    @ElementCollection
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "groceryList")
     private List<Ingredient> items = new ArrayList<>();
 
-    @OneToOne
-    @NotNull(message = "User is required")
-    private User user;
 
-    @NotNull(message = "Date required")
-    private Date date;
 
-    private boolean isCompleted = false;
-
-    public GroceryList(List<Ingredient> items, User user, Date date) {
+    public GroceryList(List<Ingredient> items) {
         this.items = items;
-        this.user = user;
-        this.date = date;
 
     }
 
     public GroceryList(){}
 
-    public User getUser() {
-        return user;
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public List<Ingredient> getItems() {
         return items;
@@ -51,19 +35,20 @@ public class GroceryList extends AbstractEntity {
         this.items = items;
     }
 
-    public Date getDate() {
-        return date;
-    }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public boolean isCompleted() {
-        return isCompleted;
-    }
-
-    public void setCompleted() {
-        this.isCompleted = true;
-    }
+    //    public Date getDate() {
+//        return date;
+//    }
+//
+//    public void setDate(Date date) {
+//        this.date = date;
+//    }
+//
+//    public boolean isCompleted() {
+//        return isCompleted;
+//    }
+//
+//    public void setCompleted() {
+//        this.isCompleted = true;
+//    }
 }

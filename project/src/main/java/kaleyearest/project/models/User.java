@@ -33,8 +33,8 @@ public class User extends AbstractEntity {
     @ElementCollection
     private List<GroceryList> groceryLists = new ArrayList();
 
-    @ElementCollection
-    private List<Recipes> favoriteRecipes = new ArrayList();
+//    @ElementCollection
+//    private List<Recipes> favoriteRecipes = new ArrayList();
 
 //    public Pantry getPantry() {
 //        return pantry;
